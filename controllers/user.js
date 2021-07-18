@@ -43,10 +43,11 @@ module.exports = {
         let result = decrypt(req.body.password, user.password);
         if (result) {
           let jwtPayload = {
-            id: user._id,
+            _id: user._id,
             email: user.email,
           };
           user = user.toJSON();
+          delete user['password']
           user.token = jwt.sign(jwtPayload, config.secret, {
             expiresIn: 60 * 60 * 24,
           });
