@@ -1,7 +1,7 @@
 const Quiz = require("../models/quizes");
 const fetch = require('node-fetch');
 
-module.exports = {
+let _self = {
 
   createQuiz:  (req, res) => {
 
@@ -20,11 +20,28 @@ module.exports = {
      
 },
 
+shuffleArray : (array)=> {
+  for (var i = array.length - 1; i > 0; i--) {
+  
+      // Generate random number
+      var j = Math.floor(Math.random() * (i + 1));
+                  
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+  }
+      
+  return array;
+},
+
   getQuizByCategory: async (req, res) => {
 
      try {
       const quiz = await Quiz.find({category : req.body.category})
-      console.log(quiz);
+      quiz.map((quizz)=>{
+        quizz.incorrect_answers.push(quizz.correct_answer)
+        quizz.incorrect_answers = _self.shuffleArray(quizz.incorrect_answers)
+      })
        res.json({
          status:'success',
          message:'Quiz list.',
@@ -38,3 +55,5 @@ module.exports = {
      }
   }
 }
+
+module.exports = _self
