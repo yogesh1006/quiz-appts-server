@@ -14,7 +14,10 @@ const userSchema =new mongoose.Schema({
     game_score:[{
         category:String,
         score: String,
-        played_date: String 
+        played_date: {
+            type:Date,
+            default: moment().unix()* 1000
+        } 
 
     }]
 

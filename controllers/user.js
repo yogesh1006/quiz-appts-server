@@ -72,8 +72,8 @@ module.exports = {
     try {
        let user = await User.findById(req.user._id)
 
-       user.game_score.push(req.body.game_score)
-       let updatedUser = await User.findByIdAndUpdate(req.user._id, {game_score: user.game_score}, {new: true})
+      //  user.game_score.push(req.body.game_score)
+       let updatedUser = await User.findByIdAndUpdate(req.user._id, {$push: {game_score: req.body}}, {new: true})
 
        res.json({
         status: "success",
