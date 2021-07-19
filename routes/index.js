@@ -13,7 +13,9 @@ router.post("/login",Validate.validateLogin(),UserController.login);
 
 //quiz routes
 // router.post('/createquiz',QuizController.createQuiz);
+router.get("/api/get_user_data",UserController.getUserData)
 router.post('/api/get_quiz_by_category',QuizController.getQuizByCategory);
 router.post('/api/update_user_score',UserController.updateScore)
+
 
 module.exports = router;

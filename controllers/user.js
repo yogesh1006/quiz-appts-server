@@ -77,26 +77,29 @@ module.exports = {
 
        res.json({
         status: "success",
-        message: "User logged in successfully.",
+        message: "User score updated successfully.",
         data: updatedUser,
       });
     } catch (error) {
       res.status(400).json({
-        message: (err && err.message) || "Oops! Failed to login.",
+        message: (err && err.message) || "Oops! Failed to update userscore.",
       });
     }
 
 
   },
 
-  // getTopScorer : async (req, res) => {
-    
-  //   try {
-  //      let topScorer = 
-  //   } catch (error) {
-      
-  //   }
-
-
-  // }
+   getUserData: async (req, res) => {
+     try {
+       let user = await User.findById(req.user._id)
+       res.json({
+         status:"success",
+         data:user
+       })
+     } catch (error) {
+      res.status(400).json({
+        message: (err && err.message) || "Oops! Failed to get user.",
+      });
+     }
+   }
 };
