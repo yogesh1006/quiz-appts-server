@@ -92,6 +92,9 @@ module.exports = {
    getUserData: async (req, res) => {
      try {
        let user = await User.findById(req.user._id)
+       user.created_at=undefined;
+       user.password= undefined;
+       user.__v=undefined;
        res.json({
          status:"success",
          data:user
